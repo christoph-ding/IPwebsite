@@ -20,8 +20,8 @@ connection
 // Ip Addresses
 var User = connection.define('User', {
   email: Sequelize.STRING,
-  IPAddress: Sequelize.STRING,
-  Place: Sequelize.STRING
+  ip: Sequelize.STRING,
+  location: Sequelize.STRING
   },
   {
     tableName: 'Users'

@@ -1,7 +1,7 @@
 // NPM Dependencies
 var express = require('express');
 var path = require('path');
-var bodyParser = require('body-parser'); 
+var bodyParser = require('body-parser');
 
 // Define Server and database
 var app = express();
@@ -26,7 +26,14 @@ app.get('/', function(req, res) {
 })
 
 app.post('/', function(req, res) {
-  console.log('===============', req.body);
+  // data
+  var email = req.body.email;
+  var ip = req.body.ip;
+  var geo = geoip.lookup(ip);
+
+  // TESTING PURPOSES ONLY
+  console.log('email: ', email, ' ip: ', ip, ' geo: ', geo);
+
   res.sendStatus(200);
 })
 

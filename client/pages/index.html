@@ -5,7 +5,19 @@
   <title> Landing Page </title>
   <link rel="stylesheet" type="text/css" href="../assets/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script type="text/javascript">
 
+
+  var ip;
+  // this is an awesome api!  saved me like a million steps when I discovered it!
+  $.getJSON('//gd.geobytes.com/GetCityDetails?callback=?', function(data) {
+    geoIPData = JSON.stringify(data, null, 2);
+    console.log(geoIPData);
+    ip = geoIPData.geobytesipaddress;
+    location = geoIPData.geobytesfqcn;
+  });
+
+  </script>
 </head>
 <body>
   <h1> Fun Times With Your IP Address! </h1>  
@@ -20,10 +32,10 @@
   <script>
     $('#signup-form').submit(function(event) {
       event.preventDefault();
-      var userEmail = $(this).find('input[name="user-email"]').val();
+      var email = $(this).find('input[name="user-email"]').val();
       // TESTING PURPOSES ONLY
-      console.log('sending... ' + userEmail);
-      $.post('http://localhost:8000/', { s: userEmail }, function(status) {
+      console.log('sending... ', userEmail, ' at ip:', ip );
+      $.post('http://localhost:8000/', { email: email, ip: ip, location:location }, function(status) {
         console.log(status);
       })
     })
