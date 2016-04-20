@@ -22,10 +22,10 @@ var User = connection.define('User', {
   email: Sequelize.STRING,
   IPAddress: Sequelize.STRING,
   Place: Sequelize.STRING
+  },
   {
     tableName: 'Users'
-  }
-});
+  });
 
 // Create tables
 User.sync();

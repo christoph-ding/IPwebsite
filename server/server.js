@@ -3,9 +3,10 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser'); 
 
-// Define Server
+// Define Server and database
 var app = express();
 var port = 8000;
+var db = require(path.join(__dirname, './dbConfig.js'));
 
 // Pages and Files
 var staticFiles = '/../client';
@@ -15,7 +16,7 @@ var communityPage = '/../client/pages/infoPage.html';
 // Serve Static Files
 app.use(express.static(path.join(__dirname + staticFiles)));
 
-// Routing
+// Routing between Pages
 
 // Sign-up
 app.use('/', bodyParser.urlencoded());
@@ -33,7 +34,6 @@ app.post('/', function(req, res) {
 app.get('/community', function(req, res) {
   res.sendFile(path.join(__dirname + communityPage));
 })
-
 
 app.get('')
 // Connect to server
