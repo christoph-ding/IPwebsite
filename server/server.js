@@ -1,6 +1,7 @@
 // NPM Dependencies
 var express = require('express');
 var path = require('path');
+var bodyParser = require('body-parser'); 
 
 // Define Server
 var app = express();
@@ -14,13 +15,25 @@ var communityPage = '/../client/pages/infoPage.html';
 // Serve Static Files
 app.use(express.static(path.join(__dirname + staticFiles)));
 
+// Routing
+
+// Sign-up
+app.use('/', bodyParser.urlencoded());
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + landingPage));
 })
 
+app.post('/', function(req, res) {
+  console.log('===============', req.body);
+  res.sendStatus(200);
+})
+
+// Community
 app.get('/community', function(req, res) {
   res.sendFile(path.join(__dirname + communityPage));
 })
+
 
 app.get('')
 // Connect to server

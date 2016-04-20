@@ -4,18 +4,32 @@
   <meta charset="utf-8">
   <title> Landing Page </title>
   <link rel="stylesheet" type="text/css" href="../assets/style.css">
-  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 </head>
 <body>
   <h1> Fun Times With Your IP Address! </h1>  
 
-  <form>
-    <input type="email" placeholder="Sign up for spam!"> 
+  <form id="signup-form">
+    <input type="email" name='user-email' placeholder="Sign up for spam!"> 
     <input type="submit" value="Do it!">
   </form>
 
   <input type="button" onclick="location.href='http://localhost:8000/community';" value="Community" />
+
+  <script>
+    $('#signup-form').submit(function(event) {
+      event.preventDefault();
+
+      var userEmail = $(this).find('input[name="user-email"]').val()
+
+      console.log('sending... ' + userEmail)
+
+      $.post('http://localhost:8000/', { s: userEmail }, function(status) {
+        console.log(status);
+      })
+    })
+  </script>
 
 </body>
 </html>
