@@ -9,22 +9,31 @@
 <body class="stats">
   <h1> Look at this community! </h1>  
 
-  <ul id="user-table">
-  </ul>
+  <table id="user-table">
+    <tr>
+      <th scope="col">Email</th>
+      <th scope="col">IP</th>
+      <th scope="col">Location</th>
+      <th scope="col">Signed Up At</th>
+    </tr>
+  </table>
 
   <input type="button" onclick="location.href='http://localhost:8000/';" value="Sign up...again" />
 
   <!-- JQuery is not cool -->
   <script>
     var renderUsers = function(users) {
+      var content = $('#user-table');
       for (var i = 0; i < users.length; i++) {
-        
+        var currentUser = users[i];
+        console.log('user ', i, ': ', currentUser);
+        var row = '<tr> <td>' + currentUser.email + '</td> <td>' + currentUser.ip + '</td> <td>' + currentUser.location + '</td> <td>'+ currentUser.createdAt +'</td> </tr>';
+        content.append(row);
       }
     } 
 
     $( document ).ready(function() {
       $.post('/community', function(data) {
-        console.log(data);
         renderUsers(data);
       })
     });
