@@ -14,7 +14,9 @@
     <input type="submit" value="Do it!">
   </form>
 
-  <input type="button" onclick="location.href='https://shrouded-savannah-67175.herokuapp.com/community';" value="Community" />
+<!--   <input type="button" onclick="location.href='https://shrouded-savannah-67175.herokuapp.com/community';" value="Community" /> -->
+
+  <input type="button" onclick="location.href='http://localhost:8000/community';" value="Community" />
 
   <!-- JQuery is not cool -->
   <script>
@@ -27,18 +29,24 @@
       email = $(this).find('input[name="user-email"]').val();
       // TESTING PURPOSES ONLY
       console.log('sending... ', email, ' at ip:', ip, ' @: ', place);
-      $.post('https://shrouded-savannah-67175.herokuapp.com/', { email: email, ip: ip, place: place }, function(status) {
+      $.post('http://localhost:8000/', { email: email, ip: ip, place: place }, function(status) {
         console.log(status);
       })
-    })
+    });
 
     // this is an awesome api for getting IP info!  saved me like a million steps when I discovered it!
-    $.getJSON('https://ipinfo.io', function(data) {
+    $.getJSON('//gd.geobytes.com/GetCityDetails?callback=?', function(data) {
       // TESTING PURPOSES ONLY - data is this glorious json object
       console.log(data);
-      ip = data.ip;
-      place = data.city;
+      ip = data.geobytesipaddress;
+      place = data.geobytesfqcn;
     });
+    // $.getJSON('https://ipinfo.io', function(data) {
+    //   // TESTING PURPOSES ONLY - data is this glorious json object
+    //   console.log(data);
+    //   ip = data.ip;
+    //   place = data.city;
+    // });
   </script>
 
 </body>
