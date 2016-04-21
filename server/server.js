@@ -23,19 +23,33 @@ app.use('/', bodyParser.urlencoded());
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + landingPage));
-})
+});
 
 app.post('/', function(req, res) {
   // data
   var email = req.body.email;
   var ip = req.body.ip;
-  var geo = geoip.lookup(ip);
-
+  var place = req.body.place;
   // TESTING PURPOSES ONLY
-  console.log('email: ', email, ' ip: ', ip, ' geo: ', geo);
+  console.log('email: ', email, ' ip: ', ip, ' location: ', place);
 
-  res.sendStatus(200);
-})
+  // Putting it up in dat DB
+  db.User.find({where: {email: email}})
+    .then(function (user) {
+      if (!user) {
+        return db.User.create({
+          email: email,
+          ip: ip,
+          location: place
+        })
+        .then(function () {
+          res.send(200);
+        })
+      } else {
+        res.send('this email is already registered!');
+      }
+    })
+});
 
 // Community
 app.get('/community', function(req, res) {

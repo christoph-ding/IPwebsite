@@ -24,8 +24,11 @@ var User = connection.define('User', {
   location: Sequelize.STRING
   },
   {
-    tableName: 'Users'
+    tableName: 'User'
   });
 
 // Create tables
 User.sync();
+
+// Export connection
+exports.User = User;

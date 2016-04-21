@@ -5,19 +5,6 @@
   <title> Landing Page </title>
   <link rel="stylesheet" type="text/css" href="../assets/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script type="text/javascript">
-
-
-  var ip;
-  // this is an awesome api!  saved me like a million steps when I discovered it!
-  $.getJSON('//gd.geobytes.com/GetCityDetails?callback=?', function(data) {
-    geoIPData = JSON.stringify(data, null, 2);
-    console.log(geoIPData);
-    ip = geoIPData.geobytesipaddress;
-    location = geoIPData.geobytesfqcn;
-  });
-
-  </script>
 </head>
 <body>
   <h1> Fun Times With Your IP Address! </h1>  
@@ -30,15 +17,27 @@
   <input type="button" onclick="location.href='http://localhost:8000/community';" value="Community" />
 
   <script>
+    var ip;
+    var place;
+    var email;
+
     $('#signup-form').submit(function(event) {
       event.preventDefault();
-      var email = $(this).find('input[name="user-email"]').val();
+      email = $(this).find('input[name="user-email"]').val();
       // TESTING PURPOSES ONLY
-      console.log('sending... ', userEmail, ' at ip:', ip );
-      $.post('http://localhost:8000/', { email: email, ip: ip, location:location }, function(status) {
+      console.log('sending... ', email, ' at ip:', ip, ' @: ', place);
+      $.post('http://localhost:8000/', { email: email, ip: ip, place: place }, function(status) {
         console.log(status);
       })
     })
+
+    // this is an awesome api!  saved me like a million steps when I discovered it!
+    $.getJSON('//gd.geobytes.com/GetCityDetails?callback=?', function(data) {
+      // TESTING PURPOSES ONLY - data is this glorious json object
+      console.log(data);
+      ip = data.geobytesipaddress;
+      place = data.geobytesfqcn;
+    });
   </script>
 
 </body>
