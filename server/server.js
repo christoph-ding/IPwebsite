@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 
 // Define Server and database
 var app = express();
-var port = 8000;
+var port = process.env.PORT || 8000;
 var db = require(path.join(__dirname, './dbConfig.js'));
 
 // Pages and Files

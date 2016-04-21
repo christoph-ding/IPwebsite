@@ -1,6 +1,8 @@
 // Define database connection
 var Sequelize = require('sequelize');
 
+var port;
+
 // Connection
 var connection = new Sequelize('ipAddress', null, null, {
   dialect: 'postgres',
