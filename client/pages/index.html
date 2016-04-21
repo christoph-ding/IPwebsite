@@ -33,7 +33,7 @@
     })
 
     // this is an awesome api for getting IP info!  saved me like a million steps when I discovered it!
-    $.getJSON('https://ipinfo.io?callback=?', function(data) {
+    $.getJSON('https://ipinfo.io', function(data) {
       // TESTING PURPOSES ONLY - data is this glorious json object
       console.log(data);
       ip = data.ip;
