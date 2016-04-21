@@ -53,10 +53,13 @@ app.post('/', function(req, res) {
 
 // Community
 app.get('/community', function(req, res) {
+  res.sendFile(path.join(__dirname + communityPage));
+})
+
+app.post('/community', function(req, res) {
   db.User.findAll()
     .then(function (users) {
       if (users) {
-        console.log('users: ', users);
         res.send(users);
       }
     })
@@ -64,7 +67,6 @@ app.get('/community', function(req, res) {
       console.log('oh no!', error)
       res.send(error)
     })
-  // res.sendFile(path.join(__dirname + communityPage));
 })
 
 // Connect to server

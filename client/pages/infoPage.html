@@ -4,19 +4,31 @@
   <meta charset="utf-8">
   <title> Stats Page </title>
   <link rel="stylesheet" type="text/css" href="../assets/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
 <body class="stats">
   <h1> Look at this community! </h1>  
 
-  <ul>
-    <li> Placeholder </li>
-    <li> Placeholder </li>
-    <li> Placeholder </li>
-    <li> Placeholder </li>
-    <li> Placeholder </li>
+  <ul id="user-table">
   </ul>
 
   <input type="button" onclick="location.href='http://localhost:8000/';" value="Sign up...again" />
+
+  <!-- JQuery is not cool -->
+  <script>
+    var renderUsers = function(users) {
+      for (var i = 0; i < users.length; i++) {
+        
+      }
+    } 
+
+    $( document ).ready(function() {
+      $.post('/community', function(data) {
+        console.log(data);
+        renderUsers(data);
+      })
+    });
+  </script
 
 </body>
 </html>
