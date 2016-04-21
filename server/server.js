@@ -43,7 +43,7 @@ app.post('/', function(req, res) {
           location: place
         })
         .then(function () {
-          res.send(200);
+          res.sendStatus(200);
         })
       } else {
         res.send('this email is already registered!');
@@ -53,10 +53,20 @@ app.post('/', function(req, res) {
 
 // Community
 app.get('/community', function(req, res) {
-  res.sendFile(path.join(__dirname + communityPage));
+  db.User.findAll()
+    .then(function (users) {
+      if (users) {
+        console.log('users: ', users);
+        res.send(users);
+      }
+    })
+    .catch(function (error) {
+      console.log('oh no!', error)
+      res.send(error)
+    })
+  // res.sendFile(path.join(__dirname + communityPage));
 })
 
-app.get('')
 // Connect to server
 app.listen(port, function() {
   console.log('Connected to server.  Listening in on port ', port)
