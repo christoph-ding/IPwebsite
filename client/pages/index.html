@@ -27,22 +27,16 @@
       email = $(this).find('input[name="user-email"]').val();
       // TESTING PURPOSES ONLY
       console.log('sending... ', email, ' at ip:', ip, ' @: ', place);
-      $.post('http://localhost:8000/', { email: email, ip: ip, place: place }, function(status) {
+      $.post('https://shrouded-savannah-67175.herokuapp.com/', { email: email, ip: ip, place: place }, function(status) {
         console.log(status);
       })
     })
 
     // this is an awesome api for getting IP info!  saved me like a million steps when I discovered it!
-    // $.getJSON('gd.geobytes.com/GetCityDetails?callback=?', function(data) {
-    //   // TESTING PURPOSES ONLY - data is this glorious json object
-    //   console.log(data);
-    //   ip = data.geobytesipaddress;
-    //   place = data.geobytesfqcn;
-    // });
-    $.getJSON('//ip-api.com/json?callback=?', function(data) {
+    $.getJSON('https://ipinfo.io?callback=?', function(data) {
       // TESTING PURPOSES ONLY - data is this glorious json object
       console.log(data);
-      ip = data.query;
+      ip = data.ip;
       place = data.city;
     });
   </script>
