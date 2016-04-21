@@ -30,7 +30,7 @@
         var row = '<tr> <td>' + currentUser.email + '</td> <td>' + currentUser.ip + '</td> <td>' + currentUser.location + '</td> <td>'+ currentUser.createdAt +'</td> </tr>';
         content.append(row);
       }
-    } 
+    };
 
     $( document ).ready(function() {
       $.post('/community', function(data) {
